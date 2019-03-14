@@ -2,10 +2,10 @@ module.exports = function getZerosCount(number, base) {
   // your implementation
     let countZero=0;
     let lastMinMnozh;
-    let fact;
-    let promezhArr =[];
-    let mnozhFact =[];
-    function getLastEl(x) {
+    let mnozhFact;
+    let eqEl;
+    let power=1;
+    function getMnozh(x) {
        // "x" - Число, которое нам требуется разложить
         let j = 0;
         let i = 2;
@@ -21,17 +21,22 @@ module.exports = function getZerosCount(number, base) {
         } while (i < x);
         a[j] = i;
         a.sort();
-        return a[a.length - 1];
+        return a;
     }
+    mnozhFact=getMnozh(base);
 console.log('number: '+number+'base: '+base);
 
-    lastMinMnozh=getLastEl(base);
+    lastMinMnozh=mnozhFact[mnozhFact.length - 1];
+    eqEl=new Set(mnozhFact);
     console.log('el: '+lastMinMnozh);
-   let power=1;
 
-    while (number>(lastMinMnozh**power)) {
+
+    while (number>=(lastMinMnozh**power)) {
         countZero+=Math.floor(number/(lastMinMnozh**power));
         power++;
+    }
+    if (eqEl.size===1) {
+        countZero=Math.floor(countZero/(mnozhFact.length));
     }
 console.log('zero: '+countZero);
     return countZero;
