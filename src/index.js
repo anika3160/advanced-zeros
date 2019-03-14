@@ -3,7 +3,6 @@ module.exports = function getZerosCount(number, base) {
     let countZero=0;
     let lastMinMnozh;
     let mnozhFact;
-    let eqEl;
     let power=1;
     function getMnozh(x) {
        // "x" - Число, которое нам требуется разложить
@@ -24,10 +23,16 @@ module.exports = function getZerosCount(number, base) {
         return a;
     }
     mnozhFact=getMnozh(base);
+    lastMinMnozh=mnozhFact[mnozhFact.length - 1];
+    let countPower=0;
+    for (let i=0; i<mnozhFact.length; i++) {
+        if (lastMinMnozh===mnozhFact[i]){
+            countPower++;
+        }
+    }
 console.log('number: '+number+'base: '+base);
 
-    lastMinMnozh=mnozhFact[mnozhFact.length - 1];
-    eqEl=new Set(mnozhFact);
+
     console.log('el: '+lastMinMnozh);
 
 
@@ -35,9 +40,7 @@ console.log('number: '+number+'base: '+base);
         countZero+=Math.floor(number/(lastMinMnozh**power));
         power++;
     }
-    if (eqEl.size===1) {
-        countZero=Math.floor(countZero/(mnozhFact.length));
-    }
+
 console.log('zero: '+countZero);
-    return countZero;
+    return Math.floor(countZero/countPower);
 }
