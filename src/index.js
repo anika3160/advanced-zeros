@@ -4,7 +4,7 @@ module.exports = function getZerosCount(number, base) {
     let lastMinMnozh;
     let fact;
     let promezhArr =[];
-    let mnozhFact =[1];
+    let mnozhFact =[];
     function getLastEl(x) {
        // "x" - Число, которое нам требуется разложить
         let j = 0;
@@ -23,50 +23,16 @@ module.exports = function getZerosCount(number, base) {
         a.sort();
         return a[a.length - 1];
     }
-    function doArrFact(number) {
-        let arr= [];
-        for (let i=0; i<number; i++) {
-            arr[i]=i+1;
-        }
-        return arr;
-    }
-    function getArrMnozhitelei (x) {
-        let j = 0;
-        let i = 2;
-        let a = [];
-        do {
-            if ((x % i) === 0) {
-                a[j] = i;
-                j++;
-                x = Math.floor(x/i);
-            } else {
-                i++;
-            }
-        } while (i < x);
-        a[j] = i;
-        return a;
-    }
+console.log('number: '+number+'base: '+base);
 
     lastMinMnozh=getLastEl(base);
-    fact=doArrFact(number);
-
-let dopArr=[];
-    for (let i=0; i<fact.length; i++) {
-        promezhArr=[];
-        promezhArr=getArrMnozhitelei(fact[i]);
-        dopArr=mnozhFact.concat(promezhArr);
-        mnozhFact=dopArr;
-    }
     console.log('el: '+lastMinMnozh);
-    console.log('arr fact min mnozh');
-    console.log(mnozhFact);
+   let power=1;
 
-    for (let i=0; i<mnozhFact.length; i++) {
-        if (lastMinMnozh===mnozhFact[i]) {
-            countZero++;
-        }
+    while (number>(lastMinMnozh**power)) {
+        countZero+=Math.floor(number/(lastMinMnozh**power));
+        power++;
     }
-    console.log(countZero);
-
- return countZero;
+console.log('zero: '+countZero);
+    return countZero;
 }
