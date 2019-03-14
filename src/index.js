@@ -19,7 +19,6 @@ module.exports = function getZerosCount(number, base) {
             }
         } while (i < x);
         a[j] = i;
-        a.sort();
         return a;
     }
     mnozhFact=getMnozh(base);
