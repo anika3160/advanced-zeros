@@ -1,10 +1,11 @@
 module.exports = function getZerosCount(number, base) {
   // your implementation
     let countZero=0;
-    let lastMinMnozh;
-    let mnozhFact;
+    let maxMultiplier;
+    let multFactorial;
     let power=1;
-    function getMnozh(x) {
+    let countPower=0;
+    function getMultipliers(x) {
        // "x" - Число, которое нам требуется разложить
         let j = 0;
         let i = 2;
@@ -21,22 +22,22 @@ module.exports = function getZerosCount(number, base) {
         a[j] = i;
         return a;
     }
-    mnozhFact=getMnozh(base);
-    lastMinMnozh=mnozhFact[mnozhFact.length - 1];
-    let countPower=0;
-    for (let i=0; i<mnozhFact.length; i++) {
-        if (lastMinMnozh===mnozhFact[i]){
+    multFactorial=getMultipliers(base);
+    maxMultiplier=multFactorial[multFactorial.length - 1];
+
+    for (let i=0; i<multFactorial.length; i++) {
+        if (maxMultiplier===multFactorial[i]){
             countPower++;
         }
     }
 console.log('number: '+number+'base: '+base);
 
 
-    console.log('el: '+lastMinMnozh);
+    console.log('el: '+maxMultiplier);
 
 
-    while (number>=(lastMinMnozh**power)) {
-        countZero+=Math.floor(number/(lastMinMnozh**power));
+    while (number>=(maxMultiplier**power)) {
+        countZero+=Math.floor(number/(maxMultiplier**power));
         power++;
     }
 
